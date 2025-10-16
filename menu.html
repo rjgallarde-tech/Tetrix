@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Tetris Neon Arcade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="game-canvas" width="200" height="400"></canvas>
+
+    <div class="score-container">
+      Score: <span id="score">0</span><br>
+      High Score: <span id="high-score">0</span>
+    </div>
+
+    <div class="level-container">
+      Level: <span id="level">1</span>
+    </div>
+
+    <div class="controls">
+      <button id="left-btn">◀</button>
+      <button id="rotate-btn">⟳</button>
+      <button id="right-btn">▶</button>
+    </div>
+
+    <div class="controls">
+      <button id="down-btn">▼</button>
+    </div>
+
+    <div id="game-over">
+      <h2>GAME OVER</h2>
+      <p>Your Score:</p>
+      <p class="score" id="final-score">0</p>
+      <p class="high-score">High Score: <span id="final-high-score">0</span></p>
+      <button id="try-again">TRY AGAIN</button>
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="bgMusic" src="e41c3a38-56f1-4d84-92b4-0e98423504dd.mp3" loop></audio>
+  <button id="musicToggle">MUSIC: ON</button>
+  <audio id="collide-sound" src="collide.mp3"></audio>
+  <audio id="break-sound" src="breaking.mp3"></audio>
+  <audio id="game-over-sound" src="moan-By-Tuna.mp3"></audio>
+  <audio id="tryagain-sound" src="try.mp3"></audio>
+  <audio id="control-sound" src=""></audio>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>

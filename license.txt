@@ -1,0 +1,27 @@
+Tetrix Neon Arcade License Agreement
+
+© 2025 [Your Name / Your Brand]. All Rights Reserved.
+
+1. GRANT OF LICENSE
+This license grants you, the end-user, a non-exclusive, non-transferable, revocable right to:
+- Download, install, and play Tetrix Neon Arcade on a single device.
+- Use the game offline or online for personal entertainment.
+
+2. RESTRICTIONS
+You may NOT:
+- Distribute, copy, or sell this game or any of its assets.
+- Reverse-engineer, decompile, or modify the game for commercial purposes.
+- Claim ownership of the game or its assets.
+
+3. DISCLAIMER
+The game is provided “as-is” without any warranty of any kind. The creator is not responsible for any damages or data loss resulting from use.
+
+4. TERMINATION
+This license is automatically terminated if you violate any terms. Upon termination, you must delete all copies of the game.
+
+5. CONTACT
+For permissions or inquiries, contact: [your email or website]
+
+---
+
+By installing or using this game, you agree to this license.

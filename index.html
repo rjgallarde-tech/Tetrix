@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>TETRIX Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      background-color:#000;
+      overflow:hidden;
+      font-family:"Orbitron",sans-serif;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    canvas{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:#000;
+    }
+    .menu-container{
+      position:relative;
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:25px;
+      animation:slideUp 1s ease-out;
+    }
+    .logo{
+      width:260px;
+      height:auto;
+      filter:drop-shadow(0 0 25px #00f0ff);
+      animation:glow 2.5s ease-in-out infinite alternate;
+    }
+    #play-btn, #facebook-btn{
+      width:170px;
+      height:55px;
+      font-size:22px;
+      color:white;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      text-transform:uppercase;
+      letter-spacing:2px;
+      font-weight:bold;
+      font-family:"Orbitron",sans-serif;
+      transition:.25s ease;
+    }
+    #play-btn{
+      background:linear-gradient(135deg,#00bfff,#7a00ff);
+      box-shadow:0 0 20px rgba(0,255,255,0.6),0 0 40px rgba(122,0,255,0.4);
+    }
+    #play-btn:hover{
+      transform:scale(1.1);
+      box-shadow:0 0 30px #00ffff,0 0 50px #7a00ff;
+    }
+    #facebook-btn{
+      background:linear-gradient(135deg,#1877f2,#004aad);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      box-shadow:0 0 20px rgba(24,119,242,0.6),0 0 40px rgba(0,74,173,0.4);
+    }
+    #facebook-btn:hover{
+      transform:scale(1.1);
+      box-shadow:0 0 30px #1e90ff,0 0 50px #00bfff;
+    }
+    #facebook-btn svg{
+      width:22px;
+      height:22px;
+      fill:white;
+      filter:drop-shadow(0 0 6px #00bfff);
+    }
+    @keyframes glow{
+      from{filter:drop-shadow(0 0 10px #00ffff);}
+      to{filter:drop-shadow(0 0 35px #7a00ff);}
+    }
+    @keyframes slideUp{
+      0%{transform:translateY(100px);opacity:0;}
+      100%{transform:translateY(0);opacity:1;}
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+  <div class="menu-container">
+    <img src="TETRIX-10-14-2025.png" alt="TETRIX Logo" class="logo" />
+    <button id="play-btn">Play</button>
+    <button id="facebook-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+        <path d="M279.14 288l14.22-92.66h-88.91V127.92c0-25.35 12.42-50.06 52.24-50.06H293V6.26S259.49 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/>
+      </svg>
+      Facebook
+    </button>
+  </div>
+
+  <!-- Play button sound -->
+  <audio id="play-sound" src="plays.mp3"></audio>
+
+  <script>
+    const canvas=document.getElementById("matrix");
+    const ctx=canvas.getContext("2d");
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+
+    const letters="01NEONARCADETETRIX#@$%&*+-<>/".split("");
+    const fontSize=14;
+    const columns=Math.floor(canvas.width/fontSize);
+    const drops=[];
+    for(let x=0;x<columns;x++){drops[x]=1;}
+
+    function draw(){
+      ctx.fillStyle="rgba(0,0,0,0.1)";
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      const gradient=ctx.createLinearGradient(0,0,canvas.width,canvas.height);
+      gradient.addColorStop(0,"#00ffff");
+      gradient.addColorStop(0.5,"#00bfff");
+      gradient.addColorStop(1,"#7a00ff");
+      ctx.fillStyle=gradient;
+      ctx.font=fontSize+"px monospace";
+      for(let i=0;i<drops.length;i++){
+        const text=letters[Math.floor(Math.random()*letters.length)];
+        ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+        if(drops[i]*fontSize>canvas.height && Math.random()>0.975){drops[i]=0;}
+        drops[i]++;
+      }
+    }
+    setInterval(draw,35);
+    window.addEventListener("resize",()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+
+    const playBtn=document.getElementById("play-btn");
+    const playSoundElem=document.getElementById("play-sound");
+
+    playBtn.addEventListener("click",()=>{
+      playSoundElem.currentTime=0;
+      playSoundElem.play().catch(()=>{});
+      document.querySelector(".menu-container").style.transition="transform 0.8s ease, opacity 0.8s ease";
+      document.querySelector(".menu-container").style.transform="translateY(-200px)";
+      document.querySelector(".menu-container").style.opacity="0";
+      setTimeout(()=>{ window.location.href="menu.html"; },800);
+    });
+
+    // Facebook button click
+    document.getElementById("facebook-btn").addEventListener("click",()=>{
+      window.open("https://www.facebook.com/share/1BSdwmpC7g/","_blank");
+    });
+  </script>
+</body>
+</html>
